@@ -1,0 +1,48 @@
+group 'rsol.impala.service'
+version '1.0-SNAPSHOT'
+
+buildscript {
+    ext.kotlin_version = '1.1.4-2'
+
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-compiler-embeddable:$kotlin_version"
+    }
+}
+
+apply plugin: 'kotlin'
+apply plugin: 'application'
+
+mainClassName = 'rsol.impala.service.AppKt'
+
+dependencies {
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+    compile "io.javalin:javalin:0.4.2"
+    compile "org.apache.httpcomponents:httpclient:4.5.3"
+    compile "io.jsonwebtoken:jjwt:0.7.0"
+    compile "commons-logging:commons-logging:1.2"
+    compile("org.apache.hadoop:hadoop-common:2.7.2") {
+        exclude(module: "jdk.tools")
+        exclude(module: "jersey-server")
+        exclude(module: "jersey-json")
+        exclude(module: "jetty")
+        exclude(module: "jetty-util")
+        exclude(module: "servlet-api")
+    }
+    compile "org.jetbrains.kotlin:kotlin-stdlib-jre7:1.1.4"
+    compile "com.beust:klaxon:0.31"
+    compile "io.github.microutils:kotlin-logging:1.4.6"
+    compile "org.hsqldb:hsqldb:2.4.0"
+    compile "com.google.code.gson:gson:2.8.0"
+/*    compile ("org.apache.hive:hive-jdbc:1.1.0-cdh5.8.3"){
+        exclude(module: "jetty-all")
+    }*/
+	compile "com.cloudera.impala:ImpalaJDBC41:2.5.41"
+    compile "org.apache.thrift:libthrift:0.9.3"
+	compile ("org.apache.hive:hive-service:1.1.0-cdh5.8.3"){
+        exclude(module: "jetty-all")
+    }
+	
+    testCompile "io.kotlintest:kotlintest:2.0.5"
+    testCompile "junit:junit:4.12"
+    testCompile "org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version"
