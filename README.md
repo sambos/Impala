@@ -7,14 +7,18 @@ You may encounter Jetty server conflicts. Javalin, hive and cloudera impala all 
 
 ### Self signed certificates
 For connection to impala/hive with SSL and kerberos, you will need a self signed certificate. you may create a self signed certificate from the original certificate as follows:   
+[More keytool commands ](https://gist.github.com/sambos/f08f42192f9dc334de44dac7346b5695.js)
+
 ```
 Make sure JAVA_HOME is set, and points to a JVM version 1.7 or greater.
 Run the following command from the directory where you have got the root certificate YourRootCA.crt
 You can export the root certificate from your local machine if you have tried to connect to the SSL url for the host you are trying to connect.
 
-"$JAVA_HOME/bin/keytool" -storepasswd -new stormwatch -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass changeit && echo "yes" | "$JAVA_HOME/bin/keytool" -import -trustcacerts -file ./YourRootCA.crt -alias rootca-alias -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass password
+"$JAVA_HOME/bin/keytool" -storepasswd -new new-alias -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass changeit && echo "yes" | "$JAVA_HOME/bin/keytool" -import -trustcacerts -file ./YourRootCA.crt -alias rootca-alias -keystore "$JAVA_HOME/jre/lib/security/cacerts" -storepass password
 
 ```
+
+
 
 
 ## dependencies required for Hive Jdbc Driver
